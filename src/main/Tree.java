@@ -421,9 +421,9 @@ public class Tree {
 
     public double[] predict(float[][] features){
         ExecutorService pool = Executors.newFixedThreadPool(num_thread);
-        List<Future> list = new ArrayList<Future>();
-        for(int i=0;i<features.length;i++){
-            Callable c = new PredictCallable(features[i]);
+        List<Future> list = new ArrayList<>();
+        for (float[] feature : features) {
+            Callable c = new PredictCallable(feature);
             Future f = pool.submit(c);
             list.add(f);
         }
@@ -439,9 +439,7 @@ public class Tree {
         for(int i=0;i<ret.length;i++){
             try{
                 ret[i] = (double) list.get(i).get();
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }catch (ExecutionException e){
+            }catch (InterruptedException | ExecutionException e){
                 e.printStackTrace();
             }
         }

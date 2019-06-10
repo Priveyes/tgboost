@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void training(String[] args){
@@ -24,10 +25,7 @@ public class Main {
         int num_thread = Integer.parseInt(args[18]);
 
         String[] cat_features = args[19].split(",");
-        ArrayList<String> categorical_features = new ArrayList<>();
-        for(String cat_feature:cat_features){
-            categorical_features.add(cat_feature);
-        }
+        ArrayList<String> categorical_features = new ArrayList<>(Arrays.asList(cat_features));
 
         GBM tgb = new GBM();
         tgb.fit(file_training,

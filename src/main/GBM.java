@@ -30,7 +30,8 @@ public class GBM {
 
     private static Logger logger = Logger.getLogger("InfoLogging");
 
-    public GBM(){};
+    public GBM(){}
+
     public GBM(ArrayList<Tree> trees, Loss loss, double first_round_pred, double eta){
         this.trees = trees;
         this.loss = loss;
@@ -207,18 +208,19 @@ public class GBM {
     }
 
     private double calculate_metric(String eval_metric,double[] pred,double[] label){
-        if(eval_metric.equals("acc")){
-            return Metric.accuracy(pred,label);
-        }else if(eval_metric.equals("error")){
-            return Metric.error(pred,label);
-        }else if(eval_metric.equals("mse")){
-            return Metric.mean_square_error(pred,label);
-        }else if(eval_metric.equals("mae")){
-            return Metric.mean_absolute_error(pred,label);
-        }else if(eval_metric.equals("auc")){
-            return Metric.auc(pred,label);
-        }else {
-            throw new NotImplementedException();
+        switch (eval_metric) {
+            case "acc":
+                return Metric.accuracy(pred, label);
+            case "error":
+                return Metric.error(pred, label);
+            case "mse":
+                return Metric.mean_square_error(pred, label);
+            case "mae":
+                return Metric.mean_absolute_error(pred, label);
+            case "auc":
+                return Metric.auc(pred, label);
+            default:
+                throw new NotImplementedException();
         }
     }
 

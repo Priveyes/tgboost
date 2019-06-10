@@ -54,10 +54,10 @@ public class Metric {
 
         double accumulated_neg = 0;
         double satisfied_pair = 0;
-        for(int i=0;i<label_pred.length;i++){
-            if(label_pred[i][0] == 1){
+        for (double[] doubles : label_pred) {
+            if (doubles[0] == 1) {
                 satisfied_pair += accumulated_neg;
-            }else {
+            } else {
                 accumulated_neg += 1;
             }
         }
